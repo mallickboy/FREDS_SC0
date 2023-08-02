@@ -1,0 +1,30 @@
+.sidebaroptions{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color:white;
+}
+
+.sidebaroptions > .MuiSvgIcon-root{
+padding: 20px;
+}
+
+.sidebaroptions > h2{
+    font-weight: 800;
+    font-size: 20px;
+    margin-right: 20px;
+    
+    }
+
+.sidebaroptions:hover{
+        background-color: rgba(117,60,216,.1);
+        border-radius: 30px;
+        color: rgba(117,60,216,.99);
+        transition: color 100ms ease-out;
+    }
+
+.sidebaroptions--active{
+        
+        color: rgba(117,60,216,.99);
+      
+    }
