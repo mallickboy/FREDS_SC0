@@ -10,13 +10,15 @@
   }
   
   .tweetBox__input {
-    padding: 20px;
+    padding: 30px;
     display: flex;
   }
   
   .tweetBox__input > input {
     flex: 1;
     margin-left: 20px;
+    padding-top: 15px;
+    padding-bottom: 15px;
     font-size: 20px;
     border: none;
   }
@@ -33,8 +35,8 @@
     font-weight: 900 !important;
     text-transform: inherit !important;
     border-radius: 30px !important;
-    width: 80px;
-    height: 40px !important;
+    width: 70px !important;
+    height: 60px !important;
     margin-top: 20px !important;
     margin-left: auto !important;
   }
