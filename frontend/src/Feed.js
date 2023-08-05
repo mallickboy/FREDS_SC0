@@ -1,29 +1,93 @@
-import React from 'react'
+import React, { useState, useEffect } from "react";
 import "./feed.css"
 import Post from './Post';
 import Tweetbox from "./TweetBox.js";
 import FlipMove from "react-flip-move";
 
+import {ethers} from "ethers"
+import { contract_abi, contract_address } from "./Consts/constants";
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+await provider.send("eth_requestAccounts", []);
+const signer = provider.getSigner();
+const contract = new ethers.Contract(contract_address, contract_abi, signer); // Replace with your Ethereum node provider
+const socialMediaContract = contract;
+
+
 function Feed() {
 
-  const posts = [
-    {
-      username: "ElonMusk",
-      text: "You are Fired!!",
-      avatar: "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1229892983-square.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:",
-      image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg",
-      displayName: "Elon Musk",
-      verified: true // Assuming Elon Musk is a verified user
-    },
-    {
-      username: "ElonMusk",
-      text: "You are Fired!!",
-      avatar: "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1229892983-square.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:",
-      image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg",
-      displayName: "Elon Musk",
-      verified: true // Assuming Elon Musk is a verified user
-    }
-  ];
+const [posts, setPosts] = useState([]);
+const [newPost, setNewPost] = useState({ heading: "", body: "" });
+const [newComment, setNewComment] = useState("");
+
+const fetchPosts = async () => {
+  const allPosts = await socialMediaContract.ReturnPosts();
+  console.log(allPosts[3].heading);
+  setPosts(allPosts);
+ 
+};
+useEffect(() => {
+  fetchPosts();
+}, []);
+const createPost = async () => {
+  const { heading, body } = newPost;
+  const userId = "user1"; // Replace with the actual user id
+  try {
+    await socialMediaContract.addPost(userId, heading, body);
+    setNewPost({ heading: "", body: "" });
+    fetchPosts();
+  } catch (error) {
+    console.error("Error creating post:", error);
+  }
+};
+
+// Function to handle comment submission
+const handleComment = async (index, message) => {
+  try {
+    await socialMediaContract.comment(index, message);
+    fetchPosts();
+  } catch (error) {
+    console.error("Error adding comment:", error);
+  }
+};
+
+// Function to handle upvote
+const handleUpvote = async (index) => {
+  try {
+    await socialMediaContract.upvote(index);
+    fetchPosts();
+  } catch (error) {
+    console.error("Error upvoting:", error);
+  }
+};
+
+// Function to handle downvote
+const handleDownvote = async (index) => {
+  try {
+    await socialMediaContract.downvote(index);
+    fetchPosts();
+  } catch (error) {
+    console.error("Error downvoting:", error);
+  }
+};
+
+  // const posts = [
+  //   {
+  //     username: "ElonMusk",
+  //     text: "You are Fired!!",
+  //     avatar: "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1229892983-square.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:",
+  //     image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg",
+  //     displayName: "Elon Musk",
+  //     verified: true // Assuming Elon Musk is a verified user
+  //   },
+  //   {
+  //     username: "ElonMusk",
+  //     text: "You are Fired!!",
+  //     avatar: "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1229892983-square.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:",
+  //     image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg",
+  //     displayName: "Elon Musk",
+  //     verified: true // Assuming Elon Musk is a verified user
+  //   }
+  // ];
   
   return (
     <div className='feed'>
