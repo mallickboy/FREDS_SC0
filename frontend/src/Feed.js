@@ -15,62 +15,63 @@ const socialMediaContract = contract;
 
 function Feed() {
 
-const [posts, setPosts] = useState([]);
-const [newPost, setNewPost] = useState({ heading: "", body: "" });
-const [newComment, setNewComment] = useState("");
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState({ heading: "", body: "" });
+  // Function to fetch all posts from the smart contract
+  const fetchPosts = async () => {
+    const allPosts = await socialMediaContract.ReturnPosts();
+    setPosts(allPosts);
+    console.log(allPosts);
+  };
 
-const fetchPosts = async () => {
-  const allPosts = await socialMediaContract.ReturnPosts();
-  console.log(allPosts[3].heading);
-  setPosts(allPosts);
- 
-};
-useEffect(() => {
-  fetchPosts();
-}, []);
-const createPost = async () => {
-  const { heading, body } = newPost;
-  const userId = "user1"; // Replace with the actual user id
-  try {
-    await socialMediaContract.addPost(userId, heading, body);
-    setNewPost({ heading: "", body: "" });
+  useEffect(() => {
     fetchPosts();
-  } catch (error) {
-    console.error("Error creating post:", error);
-  }
-};
+  }, []);
 
-// Function to handle comment submission
-const handleComment = async (index, message) => {
-  try {
-    await socialMediaContract.comment(index, message);
-    fetchPosts();
-  } catch (error) {
-    console.error("Error adding comment:", error);
-  }
-};
+  // Function to create a new post
+  const createPost = async () => {
+    const { heading, body } = newPost;
+    const userId = "user1"; // Replace with the actual user id
+    try {
+      await socialMediaContract.addPost(userId, heading, body);
+      setNewPost({ heading: "", body: "" });
+      fetchPosts();
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+  };
+  // Function to handle comment submission
+  const handleComment = async (index, message) => {
+    try {
+      await socialMediaContract.comment(index, message);
+      fetchPosts();
+    } catch (error) {
+      console.error("Error adding comment:", error);
+    }
+  };
+    // Function to handle upvote
+    const handleUpvote = async (index) => {
+      try {
+        await socialMediaContract.upvote(index);
+        fetchPosts();
+      } catch (error) {
+        console.error("Error upvoting:", error);
+      }
+    };
+  
+    // Function to handle downvote
+    const handleDownvote = async (index) => {
+      try {
+        await socialMediaContract.downvote(index);
+        fetchPosts();
+      } catch (error) {
+        console.error("Error downvoting:", error);
+      }
+    };
 
-// Function to handle upvote
-const handleUpvote = async (index) => {
-  try {
-    await socialMediaContract.upvote(index);
-    fetchPosts();
-  } catch (error) {
-    console.error("Error upvoting:", error);
-  }
-};
 
-// Function to handle downvote
-const handleDownvote = async (index) => {
-  try {
-    await socialMediaContract.downvote(index);
-    fetchPosts();
-  } catch (error) {
-    console.error("Error downvoting:", error);
-  }
-};
 
-  // const posts = [
+  // let show = [
   //   {
   //     username: "ElonMusk",
   //     text: "You are Fired!!",
@@ -100,18 +101,28 @@ const handleDownvote = async (index) => {
       <Tweetbox/>
       {/*Post*/}
       <FlipMove>
-      {posts.map((post) => (
+      {posts.map((post,index) => (
           <Post
-            key={post.text}
-            displayName={post.displayName}
-            username={post.username}
-            verified={post.verified}
-            text={post.text}
-            avatar={post.avatar}
-            image={post.image}
+          handleComment={handleComment}
+          handleUpvote={handleUpvote}
+          handleDownvote={handleDownvote}
+
+          index={index}
+            key={post.text} //
+            username={"Name : TNS^3"} //
+            displayName={post.displayName} //
+            avatar={post.avatar} //
+            verified={post.verified} //
+
+            heading={post.heading}
+            message={post.body}
+            image={post.image} //
+            upvote={post.upvote}
+            downvote={post.downvote}
+            comments={post.comments}
           />
         ))}
-      {/*Post*/}
+      {/* Post */}
       {/*Post*/}
       {/*Post*/}
       {/*Post*/}
