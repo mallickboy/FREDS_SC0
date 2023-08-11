@@ -9,5 +9,5 @@ body{
   margin-left: auto;
   margin-right: auto;
   padding: 0 10px;
-  background-color: black;
+  background-image: var(--image-gradient),  url(./Assets/home-bg.jpg)
 }

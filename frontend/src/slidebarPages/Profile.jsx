@@ -18,8 +18,8 @@ const Profile = () =>{
         <>
         <div className='profile-container'>
         <div className='detel'>
-            <h3 style={styling}>Hey,I am <span className='stylename'>{profiledata.name}</span></h3>
-            <h3 className='namestyle'>{profiledata.id}</h3>
+            <h3 style={styling}>UserName :<span className='stylename'>{profiledata.name}</span></h3>
+            <h3 className='namestyle'>Public Address :{profiledata.id}</h3>
           
            </div>
            <div className='images'>

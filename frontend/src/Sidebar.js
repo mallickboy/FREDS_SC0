@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import './sidebar.css';
 import './AddPost.css';
 import Sidebaroptions from './Sidebaroptions.js';
+import freds1 from './Assets/freds1.jpg'
 
 import { Avatar, Button } from '@material-ui/core';
 import BackHandOutlinedIcon from '@mui/icons-material/BackHandOutlined';
@@ -72,7 +73,11 @@ function Sidebar() {
       {/* Rest of the sidebar content */}
       <Link to='/'>
         {/*App icon */}
-        <BackHandOutlinedIcon className='sidebar__twitterIcon' />
+        {/* <BackHandOutlinedIcon className='sidebar__twitterIcon' /> */}
+        <div className="logo1">
+            <img src={freds1} alt="Picture"></img>
+            <h1>FREDS</h1>
+          </div>
       </Link>
       <Link to='/'>
         {/*Sidebaroptions */}

@@ -1,20 +1,27 @@
 .detel{
     margin-left: 8%;
     margin-right:6%;
+    
    /* width: 100%; */
 }
+.detl>h3{
+  padding: 5%;
+}
+
 .images{
   margin-left: 8%;
 }
 .profile-container {
     display: flex;
-    margin-top:19%;
+    /* margin-top:19%; */
     /* height: 100%; */
+    margin-left: 15%;
     flex-direction: row;
     align-items: center;
+    width: 75%;
     /* justify-content: space-between; */
     padding: 20px;
-    background-color: black;
+    
     color: #fff;
     letter-spacing: 1px;
     line-height: 1;

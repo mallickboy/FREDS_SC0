@@ -87,7 +87,7 @@
 .show_comments {
   font-size: 15px;
   margin-bottom: 5px;
-  color: rgb(0, 0, 0);
+  color: white;
   display: flexbox;
   text-align: left;
   font-family: system-ui;
@@ -95,8 +95,11 @@
     /* 1em = 10px */
 
 }
+.show_comments>p {
+  font-size: 20px;
+}
 
 .heading {
   display: flex;
-  font-size: 90%
+  font-size: 30px
 }

@@ -117,3 +117,23 @@
 .form-group + .form-group {
   margin-top: 15px;
 }
+
+
+
+
+.logo1 {
+  width: 70%;
+  display: flex;
+  justify-content: left;
+  margin: 15px 37px;
+  align-items: center;
+}
+.logo1 img {
+  width: 28%;
+  max-width: 50px;
+ 
+  border-radius: 50px;
+}
+.logo1>h1{
+  color:  #cb14f4;
+}
