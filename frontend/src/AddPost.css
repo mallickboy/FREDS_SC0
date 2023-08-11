@@ -1,0 +1,90 @@
+/* Your existing styles here */
+
+/* Additional styles for the modal */
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 1;
+  }
+  
+  .modal-content {
+    background-image: var(--image-gradient), url(./Assets/home-bg.jpg);
+    color: white;
+    padding: 20px;
+    border-radius: 10px;
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    overflow: hidden; /* Hide overflow content */
+  }
+  
+  .close {
+    color: red;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 24px; /* Make the close button bigger */
+    cursor: pointer;
+  }
+  
+  .uploadButton {
+    background-color: rgba(117, 60, 216, 0.99) !important;
+    border: none !important;
+    color: white !important;
+    font-weight: 900 !important;
+    text-transform: inherit !important;
+    border-radius: 30px !important;
+    width: 100%; /* Make the button expand to the full width */
+    height: 45px !important;
+    margin-top: 20px !important;
+    margin-left: auto !important;
+  }
+  
+  .modal-content h1 {
+    color: rgba(100, 20, 238, 0.9);
+    text-align: center;
+    margin: 0;
+    padding-bottom: 10%;
+  }
+  
+  /* Adjust the gap between form elements */
+  .form-group {
+    margin: 0 -20px 15px; /* Add margin to create a gap on both sides */
+  }
+  
+  .form-group > input,
+  .form-group > textarea,
+  .form-group > label > input[type="file"] {
+    flex: 1 1;
+    margin: 0 20px; /* Adjust margin to create a gap on both sides */
+    padding: 11px 15px; /* Adjust padding for a better look */
+    font-size: 15px;
+    background-color: transparent;
+    color: white;
+    width: 80%;
+    max-width: 80%; /* Set max-width to prevent overflow */
+    height: 10%;
+    max-height: 105;
+  }
+  
+  .form-group > input::placeholder,
+  .form-group > textarea::placeholder {
+    color: white;
+    opacity: 0.7;
+  }
+  
+  /* Gap between form elements and "POST" */
+  .form-group + .form-group {
+    margin-top: 15px;
+  
+  }
+  
+  /* ... rest of the existing styles ... */

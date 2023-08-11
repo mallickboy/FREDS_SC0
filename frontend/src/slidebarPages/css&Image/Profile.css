@@ -1,0 +1,31 @@
+.detel{
+    margin-left: 8%;
+    margin-right:6%;
+   /* width: 100%; */
+}
+.images{
+  margin-left: 8%;
+}
+.profile-container {
+    display: flex;
+    margin-top:19%;
+    /* height: 100%; */
+    flex-direction: row;
+    align-items: center;
+    /* justify-content: space-between; */
+    padding: 20px;
+    background-color: black;
+    color: #fff;
+    letter-spacing: 1px;
+    line-height: 1;
+    font-family: 'Handjet',cursive;
+  }
+.namestyle:hover{
+ color: rgba(117,60,216,.99);
+}
+.stylename{
+    color:  rgba(117,60,216,.99);
+}
+.shape{
+  border-radius: 100%;
+}

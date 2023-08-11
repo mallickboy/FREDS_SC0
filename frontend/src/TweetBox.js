@@ -30,7 +30,6 @@ function TweetBox() {
             // onClick={sendTweet}
             type="submit"
             className="tweetBox__tweetButton RGBbutton"
-            id="888"
           >
             Tweet
           </Button>

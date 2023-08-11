@@ -37,7 +37,6 @@ function Comment({active, handleComment, allComments, index,Icon }) {
         <div onClick={handleCommentButtonClick} className={`sidebaroptions ${active && "sidebaroptions--active"}`}><Icon/></div>
 
 
-
         {/* // opening the comment form  */}
         {modalOpen && (
           <div className="modal-overlay" >

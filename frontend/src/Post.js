@@ -31,27 +31,37 @@ function Post({
     // username="tamal";
 
     const handleShare = async () => {
+        const url = window.location.href;
+        const text = "Best post ever";
         try {
-          if (navigator.share) {
-            await navigator.share({
-              title: 'My Shared Content',
-              text: 'Check out this awesome content!',
-              url: window.location.href,
-            });
-          } else {
-            console.log('Web Share API not supported on this browser.');
-            // Handle fallback sharing mechanism
-          }
-          console.log(window.location.href);
+            if (navigator.share) {
+                await navigator.share({
+                    title: 'My Shared Content',
+                    text: 'Check out this awesome content!',
+                    url: window.location.href,
+                });
+            } else {
+                console.log('Web Share API not supported on this browser.');
+                // Handle fallback sharing mechanism
+                shareInTweeter(url, text)
+                shareInWhatsapp(url, text)
+                console.log(window.location.href);
+            }
         } catch (error) {
-          console.error('Error sharing:', error);
+            console.error('Error sharing:', error);
         }
 
-      };
-    function getId() {
-        
-    }
-    let uniquePostId='777'; // combination of address + postId
+    };
+    function shareInTweeter(url, text) {
+        const tweetUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(text)}`;
+        window.open(tweetUrl, '_blank');
+    };
+    function shareInWhatsapp(url, text) {
+        const whatsappUrl = `https://wa.me/?text=${encodeURIComponent(`${text} ${url}`)}`;
+        window.open(whatsappUrl, '_blank');
+    };
+
+    let uniquePostId = '777'; // combination of address + postId
     const shareDivRef = useRef(null);
 
     return (
@@ -91,7 +101,7 @@ function Post({
                 <div className='CommentBar'>
                     <CommentBarIcons funIndex={index} commentFuction={handleUpvote} text={upvote.toNumber()} Icon={likeIcon} />
                     <CommentBarIcons funIndex={index} commentFuction={handleDownvote} text={downvote.toNumber()} Icon={dislikeIcon} />
-                    <CommentBarIcons text="" commentFuction={handleShare} Icon={ShareIcon} />
+                    <CommentBarIcons text="" commentFuction={handleShare} Icon={ShareIcon} />   
                     {/* <CommentBarIcons  text="" Icon={commentsIcon}/> */}
                     {/* <p  className='Vote'><span className='AddVote Up' onClick={() => handleUpvote(index)}>like </span> : { upvote.toNumber()}</p> */}
                     {/* <p className='Vote'><span className='AddVote Down' onClick={() => handleDownvote(index)}>🖕</span> : {downvote.toNumber()}</p> */}

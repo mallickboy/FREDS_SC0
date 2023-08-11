@@ -28,3 +28,7 @@ padding: 20px;
         color: rgba(117,60,216,.99);
       
     }
+
+.active{
+    color: rgba(117,60,216,.99);
+}
