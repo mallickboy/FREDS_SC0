@@ -1,6 +1,7 @@
 .feed {
-    flex: 0.4;
-    border-right: 1px solid  rgba(117,60,216,.99);
+    flex: 0.45;
+    border-right: 1px solid  rgba(117,60,216,.33);
+    border-left: 1px solid  rgba(117,60,216,.33);
     min-width: fit-content;
     overflow-y: scroll;
   }
@@ -20,11 +21,12 @@
   .feed__header {
     position: sticky;
     top: 0;
-    background-color: white;
-    z-index: 100;
+    background-color: rgba(255,255,255,.9);
+    z-index: 5;
     border: 1px solid var(--twitter-background);
-    padding: 15px 20px;
+    padding: 14px 20px;
   }
+
 
   .feed__header > h2 {
     font-size: 20px;

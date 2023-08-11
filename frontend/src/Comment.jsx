@@ -1,8 +1,9 @@
 import React, { useState} from "react";
 import "./Comment.css";
+// import "./CommentBarIcons.css"
 import './App.css';
 
-function Comment({ handleComment, allComments, index }) {
+function Comment({active, handleComment, allComments, index,Icon }) {
   //updating the comment box state for block chain
   const [newComment, setNewComment] = useState("");
 
@@ -33,7 +34,7 @@ function Comment({ handleComment, allComments, index }) {
 
     <div className="comments_div">
       <header className="App-header">
-        <button onClick={handleCommentButtonClick} className='button_change'>Comments</button>
+        <div onClick={handleCommentButtonClick} className={`sidebaroptions ${active && "sidebaroptions--active"}`}><Icon/></div>
 
 
 

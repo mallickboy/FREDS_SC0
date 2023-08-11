@@ -1,3 +1,8 @@
+:root {
+  --violetTheme: rgba(117,60,216,.99) !important; /* Defining the color variable */
+  --blackTheme: black !important; /* Defining the color variable */
+  --whiteTheme: white !important; /* Defining the color variable */
+}
 .comments_div {
   text-align: center;
 }
@@ -26,36 +31,33 @@
   border-radius: 5px;
 }
 
-.button_change {
+.button_change,.add_comments  {
   display: inline-block;
   outline: 0;
   border: 0;
   cursor: pointer;
-  font-weight: 600;
-  color: rgb(72, 76, 122);
-  font-size: 14px;
-  height: 25px;
-  padding: 1px 10px;
+  font-weight: bold;
+  color: white;
+  font-size: .875rem;
+  height: 2.1rem;
+  padding: .2rem 1.3rem;
   border-radius: 50px;
-  background-image: linear-gradient(180deg, #fff, #f5f5fa);
-
+  background:rgba(117,60,216,.99);
+  margin: .6rem;
   box-shadow: 0 4px 11px 0 rgb(37 44 97 / 15%), 0 1px 3px 0 rgb(93 100 148 / 20%);
   transition: all .2s ease-out;
 
 
 }
 
-.button_change:hover {
-  color: white;
-  background: #52a0f9;
-  box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
+.button_change:hover, .add_comments:hover {
+  color: rgba(117,60,216,.99);
+  background-color: rgb(246, 246, 246);
+  /* border: 1px solid black; */
+  /* box-shadow: rgba(0, 0, 0, 0.56) 0px 22px 70px 4px; */
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
 }
 
-.add_comments:hover {
-  color: white;
-  background: #52a0f9;
-  box-shadow: 0 8px 22px 0 rgb(37 44 97 / 15%), 0 4px 6px 0 rgb(93 100 148 / 20%);
-}
 
 .close-button {
   position: absolute;
@@ -67,14 +69,7 @@
   font-size: 18px;
 }
 
-.add_comments {
-  cursor: pointer;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  border-radius: 8px;
-  outline: none;
 
-}
 
 .comments {
   margin-top: 20px;

@@ -1,0 +1,42 @@
+/* For all elements */
+.CommentBar{
+    display: flex;
+    justify-content: space-between;
+    /* padding: .3rem; */
+    margin-right: 1rem;
+}
+
+/* Seperate elements */
+.commentBarIcon{
+    display: flex;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    cursor: pointer;
+    color:white;
+    width: auto;
+}
+
+.commentBarIcon > .MuiSvgIcon-root{
+padding: 1rem 1rem;
+}
+
+.commentBarIcon > h2{
+    font-weight: 600;
+    font-size: 20px;
+    margin-right: 20px;
+    margin-bottom: .25rem;
+    
+    }
+
+.commentBarIcon:hover{
+        background-color: rgba(117,60,216,.1);
+        border-radius: 30px;
+        color: rgba(117,60,216,.99);
+        transition: color 120ms ease-out;
+    }
+
+.commentBarIcon--active{
+        
+        color: rgba(117,60,216,.99);
+      
+    }

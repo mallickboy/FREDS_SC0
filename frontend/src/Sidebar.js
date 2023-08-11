@@ -25,7 +25,7 @@ function Sidebar() {
         <Sidebaroptions  text="More" Icon={MoreHorizOutlinedIcon}/>
 
         {/*Addpost button*/}
-        <Button variant="outlined" className="sidebar__tweet" fullWidth>
+        <Button variant="outlined" className="sidebar__tweet" >
         Post
       </Button>
       

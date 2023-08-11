@@ -4,13 +4,16 @@ import Post from './Post';
 import Tweetbox from "./TweetBox.js";
 import FlipMove from "react-flip-move";
 
-import {ethers} from "ethers"
+import { ethers } from "ethers"
 import { contract_abi, contract_address } from "./Consts/constants";
+import { red } from "@mui/material/colors";
 const provider = new ethers.providers.Web3Provider(window.ethereum);
 await provider.send("eth_requestAccounts", []);
 const signer = provider.getSigner();
 const contract = new ethers.Contract(contract_address, contract_abi, signer); // Replace with your Ethereum node provider
 const socialMediaContract = contract;
+const pubAddress = await signer.getAddress();
+console.log(pubAddress)
 
 
 function Feed() {
@@ -49,25 +52,25 @@ function Feed() {
       console.error("Error adding comment:", error);
     }
   };
-    // Function to handle upvote
-    const handleUpvote = async (index) => {
-      try {
-        await socialMediaContract.upvote(index);
-        fetchPosts();
-      } catch (error) {
-        console.error("Error upvoting:", error);
-      }
-    };
-  
-    // Function to handle downvote
-    const handleDownvote = async (index) => {
-      try {
-        await socialMediaContract.downvote(index);
-        fetchPosts();
-      } catch (error) {
-        console.error("Error downvoting:", error);
-      }
-    };
+  // Function to handle upvote
+  const handleUpvote = async (index) => {
+    try {
+      await socialMediaContract.upvote(index);
+      fetchPosts();
+    } catch (error) {
+      console.error("Error upvoting:", error);
+    }
+  };
+
+  // Function to handle downvote
+  const handleDownvote = async (index) => {
+    try {
+      await socialMediaContract.downvote(index);
+      fetchPosts();
+    } catch (error) {
+      console.error("Error downvoting:", error);
+    }
+  };
 
 
 
@@ -89,25 +92,30 @@ function Feed() {
   //     verified: true // Assuming Elon Musk is a verified user
   //   }
   // ];
-  
+  let pic = {
+    // image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg",
+    avatar: "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1229892983-square.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:",
+    image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
+  }
+
   return (
-    <div className='feed'>
-        {/*Home */}
-        <div className="feed__header">
+    <div className='feed'id="feedTop">
+      {/*Home */}
+      <div className="feed__header">
         <h2>Home</h2>
       </div>
-      
+
       {/*Tweet box */}
-      <Tweetbox/>
+      <Tweetbox />
       {/*Post*/}
       <FlipMove>
-      {posts.map((post,index) => (
+        {posts.map((post, index) => (
           <Post
-          handleComment={handleComment}
-          handleUpvote={handleUpvote}
-          handleDownvote={handleDownvote}
+            handleComment={handleComment}
+            handleUpvote={handleUpvote}
+            handleDownvote={handleDownvote}
 
-          index={index}
+            index={index}
             key={post.text} //
             username={"Name : TNS^3"} //
             displayName={post.displayName} //
@@ -116,19 +124,19 @@ function Feed() {
 
             heading={post.heading}
             message={post.body}
-            image={post.image} //
+            image={pic.image} //{post.image} //
             upvote={post.upvote}
             downvote={post.downvote}
             comments={post.comments}
           />
         ))}
-      {/* Post */}
-      {/*Post*/}
-      {/*Post*/}
-      {/*Post*/}
-      {/*Post*/}
-      {/*Post*/}
-      {/*Post*/}
+        {/* Post */}
+        {/*Post*/}
+        {/*Post*/}
+        {/*Post*/}
+        {/*Post*/}
+        {/*Post*/}
+        {/*Post*/}
       </FlipMove>
     </div>
   )
