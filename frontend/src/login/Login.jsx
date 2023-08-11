@@ -1,11 +1,10 @@
 import React from "react";
 import Navbar from "./Navbar";
-import Vote from "../Assets/freds.jpg";
-import Fox from "../Assets/fox.png";
+import Vote from "../assets/freds.jpg";
+import Fox from "../assets/fox.png";
 import "./login.css";
 
-
-function IntroPage(props) {
+export const Login = (props) => {
   console.log("ShowNAM " + props.ShowNotAuthorized);
   const handleButtonClick = () => {
     window.open(
@@ -75,7 +74,5 @@ function IntroPage(props) {
       </div>
     </div> */}
     </>
-  )
-}
-
-export default IntroPage;
+  );
+};
