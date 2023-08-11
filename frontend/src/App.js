@@ -7,10 +7,9 @@ let loggedIn=0;
 function App() {
   return (
     <div className="App">
-      {/* <Entrypage/> */}
-      {/* <IntroPage/> */}
+      <IntroPage/>
       {/* Render home when get return from login */}
-      <Home/>
+      {/* <Home/> */}
     </div>
   )
 }

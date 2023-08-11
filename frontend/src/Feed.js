@@ -124,7 +124,7 @@ function Feed() {
 
             heading={post.heading}
             message={post.body}
-            image={pic.image} //{post.image} //
+            image={pic.image} //{post.image} // add the image link of block chain here
             upvote={post.upvote}
             downvote={post.downvote}
             comments={post.comments}

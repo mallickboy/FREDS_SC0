@@ -90,12 +90,12 @@ function Post({
                         {/* <img src={image} /> */}
                     </div>
                 </div>
-                <div className='post__footer'>
+                {/* <div className='    '>
                     <ChatBubbleOutlineIcon fontSize="small" />
                     <RepeatIcon fontSize="small" />
                     <FavoriteBorderIcon fontSize="small" />
                     <PublishIcon fontSize="small" />
-                </div>
+                </div> */}
 
                 {/* Buttom PostBar or say CommentIconBar */}
                 <div className='CommentBar'>
