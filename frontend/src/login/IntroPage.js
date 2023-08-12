@@ -8,6 +8,9 @@ import image from "../Assets/freds1.jpg";
 
 
 function IntroPage(props) {
+  const askLogin=()=>{
+    props.setShowLogin(false)
+  }
   console.log("ShowNAM " + props.ShowNotAuthorized);
   const handleButtonClick = () => {
     window.open(
@@ -115,7 +118,7 @@ function IntroPage(props) {
                 <button className="btn btn-dark" onClick={handleOpenModal}>
                   Sing up
                 </button>
-                <button className="btn btn-dark" onClick={handleSingIn}>
+                <button className="btn btn-dark" onClick={askLogin}>
                   Sign in with Metamask
                 </button>
               </div>
