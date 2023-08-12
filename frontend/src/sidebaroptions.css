@@ -8,7 +8,7 @@
 .sidebaroptions > .MuiSvgIcon-root{
 padding: 20px;
 }
-
+a{text-decoration: none;}
 .sidebaroptions > h2{
     font-weight: 800;
     font-size: 20px;

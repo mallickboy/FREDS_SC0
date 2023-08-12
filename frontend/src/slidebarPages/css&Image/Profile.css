@@ -1,9 +1,14 @@
 .detel{
-    margin-left: 8%;
-    margin-right:6%;
     
+    margin-left: 8%;
+    margin-right: 6%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 2vw;
+  }
    /* width: 100%; */
-}
+
 .detl>h3{
   padding: 5%;
 }
@@ -16,7 +21,7 @@
     /* margin-top:19%; */
     /* height: 100%; */
     margin-left: 15%;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
     width: 75%;
     /* justify-content: space-between; */
@@ -25,7 +30,7 @@
     color: #fff;
     letter-spacing: 1px;
     line-height: 1;
-    font-family: 'Handjet',cursive;
+    
   }
 .namestyle:hover{
  color: rgba(117,60,216,.99);
@@ -34,5 +39,6 @@
     color:  rgba(117,60,216,.99);
 }
 .shape{
-  border-radius: 100%;
+  border-radius: 50%;
+  width: 15%;
 }

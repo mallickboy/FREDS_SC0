@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Avatar, Button } from '@material-ui/core';
 import Navbar from "./Navbar";
 import Vote from "../Assets/freds.jpg";
@@ -15,7 +15,12 @@ const contract = new ethers.Contract(contract_address, contract_abi, signer);
 const socialMediaContract=contract
 function IntroPage(props) {
   const [file, setFile] = useState(null);
+  const [image,setimage]=useState("");
   const [userName,setuserName]=useState("")
+  const askLogin=()=>{
+    props.setShowLogin(false)
+  }
+  console.log("ShowNAM " + props.ShowNotAuthorized);
   const handleButtonClick = () => {
     window.open(
       "https://drive.google.com/file/d/1WO0uSGg5z5axv99zabekI_ZhjXEJZSKE/view?usp=drive_link"
@@ -29,7 +34,14 @@ function IntroPage(props) {
   });
   const [previewImage, setPreviewImage] = useState(null);
 
-  const handleOpenModal = () => {
+  const handleOpenModal = async() => {
+    const isRegistered= await contract.isRegistered()
+    console.log("Registered:",isRegistered)
+    if(isRegistered)
+    {
+      alert("You have already registered!!")
+      return
+    }
     setModalVisible(true);
   };
 
@@ -61,13 +73,26 @@ function IntroPage(props) {
   //     reader.readAsDataURL(file);
   //   }
   // };
-
+useEffect(()=>
+{   const getUser =async()=>
+  {
+    const user= await contract.returnUser()
+    console.log(user)
+  }
+  getUser()
+  
+},[])
+const RegisterUser=async()=>{
+  
+   await contract.registerUser(userName,image);
+  };
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (!newPost.userName || !newPost.body) {
+    if (!userName ) {
       alert('Please fill in both the userName and Body fields.');
     } else {
-      console.log('Form submitted:', newPost);
+     
+     RegisterUser()
       handleCloseModal();
     }
   };
@@ -84,7 +109,7 @@ function IntroPage(props) {
    
     const fileExtension = file.name.split('.').pop();
     const filename=address+"."+fileExtension;
-   
+   setimage(filename)
     
     // console.log("imageselted:"+newPost.imageFile);
     const formData = new FormData();
@@ -149,7 +174,7 @@ function IntroPage(props) {
                 <button className="btn btn-dark" onClick={handleOpenModal}>
                   Sing up
                 </button>
-                <button className="btn btn-dark" onClick={handleSingIn}>
+                <button className="btn btn-dark" onClick={askLogin}>
                   Sign in with Metamask
                 </button>
               </div>

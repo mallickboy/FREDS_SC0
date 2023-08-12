@@ -159,7 +159,7 @@ const Post= async ()=>
   try {
    
     const response = await axios.post('http://localhost:5000/classify', {
-      text: newPost.body
+      text: newPost.heading+" "+newPost.body
     });
     const result = response.data.prediction === 1 ? 'toxic' : 'non-toxic';
     console.log(result)
@@ -198,7 +198,7 @@ const Post= async ()=>
         {/*Sidebar options */}
         <Sidebaroptions text='Explore' Icon={HomeOutlinedIcon} />
       </Link>
-      <Link to='/' activeClassName='active'>
+      <Link to='/' ClassName='active'>
         {/*Sidebar options */}
         <Sidebaroptions text='Messages' Icon={MessageOutlinedIcon} />
       </Link>
