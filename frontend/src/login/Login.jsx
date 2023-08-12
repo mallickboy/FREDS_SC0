@@ -1,78 +1,162 @@
-import React from "react";
-import Navbar from "./Navbar";
-import Vote from "../assets/freds.jpg";
-import Fox from "../assets/fox.png";
-import "./login.css";
+function copyPn() {
+  var CopyPhone = document.getElementById("copyPn");
+  navigator.clipboard.writeText(CopyPhone.alt);
+  window.parent.location.href = `tel:+91${CopyPhone.alt}`
+  console.log(`tel:+91${CopyPhone.alt}`)
+  // alert("Copied Phone no :  " + CopyPhone.alt);
+}
 
-export const Login = (props) => {
-  console.log("ShowNAM " + props.ShowNotAuthorized);
-  const handleButtonClick = () => {
-    window.open(
-      "https://drive.google.com/file/d/1WO0uSGg5z5axv99zabekI_ZhjXEJZSKE/view?usp=drive_link"
-    );
-  };
-  return (
-    <>
-      <Navbar />
 
-      <section className="background firstSection">
-        <div className="heading">
-          <h1 className="animated-text">
-            <span>W</span>
-            <span>e</span>
-            <span>l</span>
-            <span>c</span>
-            <span>o</span>
-            <span>m</span>
-            <span>e</span>
-            <span className="space"></span>
-            <span>t</span>
-            <span>o</span>
-            <span className="space"></span>
-            <span className="violet">F</span>
-            <span className="violet">R</span>
-            <span className="violet">E</span>
-            <span className="violet">D</span>
-            <span className="violet">S</span>
-          </h1>
-        </div>
-        <div className="box-main">
-          <div className="firstHalf">
-            <p className="text-big">Unmask Your Voice:<span className="violet"> Anon Freedom</span> </p>
-            <p className="text-small">
-            Welcome to our revolutionary decentralized forum, where anonymous voices empowered by blockchain technology champion freedom of speech. We stand for those silenced by fear, providing a secure space to express ideas, guided by AI to filter out misuse. Join us in shaping a more inclusive digital future, where everyone's voice matters.
-            </p>
-            <div className="below-firsthalf">
-              <img src={Fox} alt="Metamask"></img>
-              <div className="buttons">
-                <button className="btn btn-dark" onClick={props.connectAccount}>
-                  Login Metamask
-                </button>
-                <button className="btn btn-dark" onClick={handleButtonClick}>
-                  Watch Video
-                </button>
-              </div>
-            </div>
-            <div className="NotAuthorized">
-              {props.ShowNotAuthorized ? <p>You are not authorized</p> : <></>}
-            </div>
-          </div>
-          <div className="secondHalf">
-            <img src={Vote} alt="Picture"></img> 
-          </div>
-        </div>
-      </section>
+let toggleBS2 = 1;
+let popupLogin=1;
 
-      {/* <div className="loginContainer">
-      
-      <button className="loginButton" onClick={props.connectAccount}>
-        Login Metamask
-      </button>
-      <div>
-        {" "}
-        {props.ShowNotAuthorized ? <p>You are not authorized</p> : <></>}
-      </div>
-    </div> */}
-    </>
-  );
-};
+const whyus = document.getElementById("whyusControl").innerHTML; // popup point
+bodySection2 = document.getElementById("whyusControl"); // dispaly position
+const loginForm=`
+<div class="loginContainer">
+<div class="loginHeading">
+  <h1>Access Now</h1>
+  <span id="closeForm" class="hoverPopout" onclick="displayLogin()">X</span>
+</div>
+
+<form class="myForm" action="/courses" method="post">
+  <input class="myInput " type="email" name="clientEmail" placeholder="Enter your email">
+  <input class="myInput" type="password" name="clientPassword" placeholder="Enter your password">
+  <button class="btn hoverPopout" name="entry" value="1">Sing in </button>
+</form>
+<form class="myForm" action="/courses" method="post" id="createAccount">    
+  <input class="myInput" type="text" name="newUserName" placeholder="Enter your name">
+  <input class="myInput" type="number" name="newUserAge" placeholder="Enter your age">
+  <input class="myInput" id="phoneNo" type="email" name="newUserEmail" placeholder="Enter your valid email">
+  <input class="myInput" type="password" name="newUserPassword" placeholder="Create your log in password">
+  <button class="btn hoverPopout" name="entry" value="2">Sing up </button>
+
+</form>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Bree+Serif&family=Indie+Flower&family=Shadows+Into+Light&display=swap');
+
+  .loginContainer {
+      display: flex;
+      position: sticky;
+      align-items: center;
+      justify-self: center;
+      flex-direction: column;
+      min-height: 50vh;
+      width: 45vw;
+      margin: auto;
+      margin-top: 30px;
+      border: 2px solid black;
+      border-radius: 10px;
+      box-shadow: rgba(0, 0, 0, 0.25) 0px 54px 55px, rgba(0, 0, 0, 0.12) 0px -12px 30px, rgba(0, 0, 0, 0.12) 0px 4px 6px, rgba(0, 0, 0, 0.17) 0px 12px 13px, rgba(0, 0, 0, 0.09) 0px -3px 5px;
+      background-color: rgb(255 255 255 / 78%);
+      outline: none;
+
+  }
+
+  .hoverPopout:hover {
+      cursor: pointer;
+      transform: scale(1.15);
+      border-radius: 20px;
+      /* box-shadow: 0 0 5px #42fbf2,
+          0 0 10px #42fbf2,
+          0 0 50px #42fbf2; */
+      transition: 300ms ease-in-out;
+  }
+
+  .loginHeading {
+      display: flex;
+      position: relative;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Indie Flower', cursive;
+      width: 45vw;
+  }
+
+  #closeForm {
+      display: flex;
+      font-size: 39px;
+      position: absolute;
+      padding-right: 1vw;
+      top: 0;
+      right: 0;
+      font-weight: bold;
+      cursor: pointer;
+      /* background-color: antiquewhite; */
+  }
+
+  #closeForm:hover {
+      color: rgb(202, 30, 32);
+  }
+
+  .loginHeading h1 {
+      font-size: 39px;
+      align-items: center;
+      justify-content: center;
+      padding: 1vh 0;
+      margin-top: 2vh;
+      /* background-color: aquamarine; */
+  }
+
+  .myForm {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+  }
+
+  .myInput {
+      width: 60%;
+      padding: 10px;
+      margin: 10px;
+      font-size: 16px;
+      border: 2px solid rgb(92, 0, 0);
+      border-radius: 12px;
+      outline: none;
+  }
+
+  .btn {
+      font-size: 20px;
+      padding: 6px 12px;
+      border: 2px solid black;
+      border-radius: 20px;
+      background-color: rgb(178 0 2);
+      color: white;
+      margin: 20px 0px;
+      font-weight: bold;
+      cursor: pointer;
+  }
+</style>
+</div>
+
+`;
+function displayLogin() {
+  // console.log('feyhr'+whyus)
+  // bodySection2.style.display="none";
+  if (toggleBS2) {
+      bodySection2.innerHTML = loginForm;
+
+      console.log('Entering into the Login form');
+      toggleBS2=0;
+  } else {
+      bodySection2.innerHTML = `${whyus}`;
+      console.log('Exiting from the Login form');
+      toggleBS2=1;
+  }
+}
+function displayAbout() {
+  if (!toggleBS2) {
+      bodySection2.innerHTML = `${whyus}`;
+      console.log('Opening Abous [whyus]');
+      toggleBS2=1;
+  } 
+}
+function displayLoginOnce(){
+  if (popupLogin && toggleBS2) {
+      bodySection2.innerHTML = loginForm;
+      console.log('1st login page popup');
+      popupLogin--;
+      toggleBS2=0;
+  }
+}
+
