@@ -18,6 +18,7 @@ NON_ASCII = re.compile(r'[^a-z0-1\s]')
 rf_classifier = joblib.load('rf_classifier_model.joblib')
 tfidf_vectorizer = joblib.load('tfidf_vectorizer.joblib')
 
+
 def normalize_texts(texts):
     normalized_texts = []
     for t in texts:
@@ -26,6 +27,7 @@ def normalize_texts(texts):
         no_non_ascii = NON_ASCII.sub(r'', no_punctuation)
         normalized_texts.append(no_non_ascii)
     return normalized_texts
+
 
 @app.route('/classify', methods=['POST'])
 def classify_text():
@@ -40,8 +42,9 @@ def classify_text():
     # Predict toxicity for the input text
     prediction = rf_classifier.predict(user_input_transformed)
     print(int(prediction[0]))
-    ans=int(prediction[0])
+    ans = int(prediction[0])
     return jsonify({'prediction': ans})
+
 
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -85,5 +88,6 @@ def upload():
 def serve_uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()
