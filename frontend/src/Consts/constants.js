@@ -1,13 +1,8 @@
-const contract_address="0xb27575173E19D8C61F6A77B6368a9B985A27fA20"
+const contract_address="0xa03179B8878C0D7E315FBcb50116a1b426839a42"
 const adminAddress=    "0x3C6E370AB799bCCD51319368Ff6d78537028202d"
 const contract_abi=[
 	{
 		"inputs": [
-			{
-				"internalType": "string",
-				"name": "userId",
-				"type": "string"
-			},
 			{
 				"internalType": "string",
 				"name": "heading",
@@ -16,6 +11,11 @@ const contract_abi=[
 			{
 				"internalType": "string",
 				"name": "body",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "image",
 				"type": "string"
 			}
 		],
@@ -50,13 +50,37 @@ const contract_abi=[
 				"type": "uint256"
 			}
 		],
+		"name": "deletePost",
+		"outputs": [],
+		"stateMutability": "nonpayable",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "index",
+				"type": "uint256"
+			}
+		],
 		"name": "downvote",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
-		"inputs": [],
+		"inputs": [
+			{
+				"internalType": "string",
+				"name": "name",
+				"type": "string"
+			},
+			{
+				"internalType": "string",
+				"name": "profileImage",
+				"type": "string"
+			}
+		],
 		"name": "registerUser",
 		"outputs": [],
 		"stateMutability": "nonpayable",
@@ -77,13 +101,31 @@ const contract_abi=[
 	},
 	{
 		"inputs": [],
+		"name": "isRegistered",
+		"outputs": [
+			{
+				"internalType": "bool",
+				"name": "",
+				"type": "bool"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
 		"name": "ReturnPosts",
 		"outputs": [
 			{
 				"components": [
 					{
+						"internalType": "address",
+						"name": "publicAdd",
+						"type": "address"
+					},
+					{
 						"internalType": "string",
-						"name": "userId",
+						"name": "name",
 						"type": "string"
 					},
 					{
@@ -94,6 +136,11 @@ const contract_abi=[
 					{
 						"internalType": "string",
 						"name": "body",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "image",
 						"type": "string"
 					},
 					{
@@ -115,6 +162,36 @@ const contract_abi=[
 				"internalType": "struct SocialMedia.post[]",
 				"name": "",
 				"type": "tuple[]"
+			}
+		],
+		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [],
+		"name": "returnUser",
+		"outputs": [
+			{
+				"components": [
+					{
+						"internalType": "string",
+						"name": "userName",
+						"type": "string"
+					},
+					{
+						"internalType": "string",
+						"name": "profilePic",
+						"type": "string"
+					},
+					{
+						"internalType": "uint256",
+						"name": "postCount",
+						"type": "uint256"
+					}
+				],
+				"internalType": "struct SocialMedia.profile",
+				"name": "",
+				"type": "tuple"
 			}
 		],
 		"stateMutability": "view",

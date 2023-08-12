@@ -19,8 +19,7 @@ console.log(pubAddress)
 function Feed() {
 
   const [posts, setPosts] = useState([]);
-  const [newPost, setNewPost] = useState({ heading: "", body: "" ,imageFile:""});
- 
+  const [newPost, setNewPost] = useState({ heading: "", body: "" });
   // Function to fetch all posts from the smart contract
   const fetchPosts = async () => {
     const allPosts = await socialMediaContract.ReturnPosts();
@@ -34,12 +33,10 @@ function Feed() {
 
   // Function to create a new post
   const createPost = async () => {
-    const { heading, body , imageFile} = newPost;
+    const { heading, body } = newPost;
     const userId = "user1"; // Replace with the actual user id
     try {
-     console.log("imageFileNmae:"+imageFile)
-     
-      await socialMediaContract.addPost( heading, body,imageFile);
+      await socialMediaContract.addPost(userId, heading, body);
       setNewPost({ heading: "", body: "" });
       fetchPosts();
     } catch (error) {
@@ -109,7 +106,7 @@ function Feed() {
       </div>
 
       {/*Tweet box */}
-      <Tweetbox createPost={createPost} newPost={newPost}  setNewPost={setNewPost} />
+      <Tweetbox />
       {/*Post*/}
       <FlipMove>
         {posts.map((post, index) => (
@@ -120,14 +117,14 @@ function Feed() {
 
             index={index}
             key={post.text} //
-            username={post.name} //
-          
+            username={"Name : TNS^3"} //
+            displayName={post.displayName} //
             avatar={post.avatar} //
             verified={post.verified} //
 
             heading={post.heading}
             message={post.body}
-            image={"http://127.0.0.1:5000/uploads/"+post.image} //{post.image} //
+            image={pic.image} //{post.image} // add the image link of block chain here
             upvote={post.upvote}
             downvote={post.downvote}
             comments={post.comments}

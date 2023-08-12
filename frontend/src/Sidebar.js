@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './sidebar.css';
 import './AddPost.css';
@@ -12,13 +12,26 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 import MessageOutlinedIcon from '@mui/icons-material/MessageOutlined';
 import MoreHorizOutlinedIcon from '@mui/icons-material/MoreHorizOutlined';
 
+import "./tweetbox.css";
+
+import axios from "axios";
+import { ethers } from "ethers";
+import { contract_abi, contract_address } from "./Consts/constants";
+import Post from './Post';
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+await provider.send("eth_requestAccounts", []);
+const signer = provider.getSigner();
+const contract = new ethers.Contract(contract_address, contract_abi, signer);
+const socialMediaContract=contract
 function Sidebar() {
   const [modalVisible, setModalVisible] = useState(false);
-  const [newPost, setNewPost] = useState({
-    heading: '',
-    body: '',
-    file: null,
-  });
+  // const [newPost, setNewPost] = useState({
+  //   heading: '',
+  //   body: '',
+  //   file: null,
+  // });
+  const [posts, setPosts] = useState([]);
+  const [newPost, setNewPost] = useState({ heading: "", body: "" ,imageFile:""});
   const [previewImage, setPreviewImage] = useState(null);
 
   const handleOpenModal = () => {
@@ -43,20 +56,20 @@ function Sidebar() {
     }));
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setNewPost((prevPost) => ({
-      ...prevPost,
-      file,
-    }));
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setNewPost((prevPost) => ({
+  //     ...prevPost,
+  //     file,
+  //   }));
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setPreviewImage(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,6 +81,79 @@ function Sidebar() {
     }
   };
 
+
+const [toxic,settoxic]=useState(false)
+  const [file, setFile] = useState(null);
+const [im,setim]=useState("");
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+
+
+  
+useEffect(()=>{
+  console.log("imageselted5:"+newPost.imageFile);
+},
+[newPost])
+  const handleUpload = async (event) => {
+    event.preventDefault();
+    const user=await contract.returnUser()
+    const postCount= user.postCount.toNumber();
+    const address= await signer.getAddress();
+    console.log(postCount)
+    const fileExtension = file.name.split('.').pop();
+    const filename=address+"_"+postCount+"."+fileExtension;
+    setNewPost({ ...newPost, imageFile: filename})
+    // console.log("imageselted:"+filename);
+    
+    // console.log("imageselted:"+newPost.imageFile);
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    formData.append('data', filename); // Replace with your string data
+
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('File uploaded:', response.data.file_url);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
+  const fetchPosts = async () => {
+    const allPosts = await socialMediaContract.ReturnPosts();
+    setPosts(allPosts);
+    console.log(allPosts);
+  };
+
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  const createPost = async () => {
+    const { heading, body , imageFile} = newPost;
+    const userId = "user1"; // Replace with the actual user id
+    try {
+     console.log("imageFileNmae:"+imageFile)
+     
+      await socialMediaContract.addPost( heading, body,imageFile);
+      setNewPost({ heading: "", body: "" });
+      fetchPosts();
+    } catch (error) {
+      console.error("Error creating post:", error);
+    }
+  };
+
+const Post= async ()=>
+{
+  // ml model function call and set variable toxic .
+  createPost()
+}
   return (
     <div className='sidebar'>
       {/* Rest of the sidebar content */}
@@ -116,7 +202,7 @@ function Sidebar() {
                 />
             </div>
 
-              <form onSubmit={handleSubmit}>
+              {/* <form onSubmit={handleSubmit}>
                 <div className='form-group'>
                   <input
                     type='text'
@@ -155,7 +241,52 @@ function Sidebar() {
                 <button type='submit' className='uploadButton'>
                   Upload and Post
                 </button>
-              </form>
+              </form> */}
+               
+    <form>
+      <div className="form-group">
+        {/* <Avatar src="https://kajabi-storefronts-production.global.ssl.fastly.net/kajabi-storefronts-production/themes/284832/settings_images/rLlCifhXRJiT0RoN2FjK_Logo_roundbackground_black.png" /> */}
+        <input
+          
+          
+          type="text"
+          
+        value={newPost.heading}
+        placeholder="Heading..."
+        onChange={(e) => setNewPost({ ...newPost, heading: e.target.value })}
+        />
+      </div>
+      
+      <div className='form-group'>
+      <textarea  style={{minHeight:"6rem"}}
+        value={newPost.body}
+        placeholder="Body..."
+        onChange={(e) => setNewPost({ ...newPost, body: e.target.value })}
+      />
+                  </div>
+
+      
+      {/* <input
+        value={tweetImage}
+        onChange={(e) => setTweetImage(e.target.value)}
+        className="tweetBox__imageInput"
+        placeholder="Optional: Enter image URL"
+        type="text"
+        
+      /> */}
+      <div classname="form-group"> <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button></div>
+ 
+      <Button
+        // onClick={sendTweet}
+        className='uploadButton'
+       
+        onClick={()=>{Post()}}
+      >
+        Post
+      </Button>
+    </form>
+  
             </div>
           </div>
         </div>
