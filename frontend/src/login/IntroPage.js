@@ -5,10 +5,17 @@ import Vote from "../Assets/freds.jpg";
 import Fox from "../Assets/fox.png";
 import "./IntroPage.css";
 import image from "../Assets/freds1.jpg";
-
-
+import axios from "axios";
+import { ethers } from "ethers";
+import { contract_abi, contract_address } from "../Consts/constants";
+const provider = new ethers.providers.Web3Provider(window.ethereum);
+await provider.send("eth_requestAccounts", []);
+const signer = provider.getSigner();
+const contract = new ethers.Contract(contract_address, contract_abi, signer);
+const socialMediaContract=contract
 function IntroPage(props) {
-  console.log("ShowNAM " + props.ShowNotAuthorized);
+  const [file, setFile] = useState(null);
+  const [userName,setuserName]=useState("")
   const handleButtonClick = () => {
     window.open(
       "https://drive.google.com/file/d/1WO0uSGg5z5axv99zabekI_ZhjXEJZSKE/view?usp=drive_link"
@@ -37,27 +44,23 @@ function IntroPage(props) {
   };
 
   const handleInputChange = (e) => {
-    const { name, value } = e.target;
-    setNewPost((prevPost) => ({
-      ...prevPost,
-      [name]: value,
-    }));
+  setuserName(e.target.value)
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setNewPost((prevPost) => ({
-      ...prevPost,
-      file,
-    }));
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setPreviewImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleFileChange = (e) => {
+  //   const file = e.target.files[0];
+  //   setNewPost((prevPost) => ({
+  //     ...prevPost,
+  //     file,
+  //   }));
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setPreviewImage(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -71,6 +74,37 @@ function IntroPage(props) {
   const handleSingIn=()=>{
     alert("sing in")
   };
+  const handleFileChange = (event) => {
+    setFile(event.target.files[0]);
+  };
+  const handleUpload = async (event) => {
+    event.preventDefault();
+   
+    const address= await signer.getAddress();
+   
+    const fileExtension = file.name.split('.').pop();
+    const filename=address+"."+fileExtension;
+   
+    
+    // console.log("imageselted:"+newPost.imageFile);
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    formData.append('data', filename); // Replace with your string data
+
+    try {
+      const response = await axios.post('http://127.0.0.1:5000/upload', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data',
+        },
+      });
+
+      console.log('File uploaded:', response.data.file_url);
+    } catch (error) {
+      console.error('Error uploading file:', error);
+    }
+  };
+
   return (
     <>
       <Navbar />
@@ -161,7 +195,7 @@ function IntroPage(props) {
                   <input
                     type='text'
                     name='userName'
-                    value={newPost.userName}
+                    value={userName}
                     placeholder='Choose your name'
                     onChange={handleInputChange}
                   />
@@ -173,12 +207,10 @@ function IntroPage(props) {
                   <div id='UploadProfile'>
 
                    <span id="uploadProfile">Profile picture : </span>
-                  <input
-                    type='file'
-                    name='file'
-                    accept='image/*'
-                    onChange={handleFileChange}
-                    />
+                 
+
+<div classname="form-group"> <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Upload</button></div>
                     </div>
                   {previewImage && (
                     <div style={{ maxWidth: '30%',maxHeight: '7rem',display: 'flex', justifyContent: 'center', marginTop: '5%' }}>
