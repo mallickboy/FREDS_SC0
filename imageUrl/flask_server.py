@@ -1,10 +1,48 @@
+from flask import Flask, request, jsonify
 from flask import Flask, request, url_for, send_from_directory, jsonify
 import os
+import re
+import numpy as np
+from sklearn.ensemble import RandomForestClassifier
+from sklearn.feature_extraction.text import TfidfVectorizer
 from flask_cors import CORS
+import joblib
 
 app = Flask(__name__)
 CORS(app)
-# Configure the directory where uploaded files will be stored
+
+NON_ALPHANUM = re.compile(r'[\W]')
+NON_ASCII = re.compile(r'[^a-z0-1\s]')
+
+# Load the trained RandomForestClassifier
+rf_classifier = joblib.load('rf_classifier_model.joblib')
+tfidf_vectorizer = joblib.load('tfidf_vectorizer.joblib')
+
+def normalize_texts(texts):
+    normalized_texts = []
+    for t in texts:
+        lower = t.lower()
+        no_punctuation = NON_ALPHANUM.sub(r' ', lower)
+        no_non_ascii = NON_ASCII.sub(r'', no_punctuation)
+        normalized_texts.append(no_non_ascii)
+    return normalized_texts
+
+@app.route('/classify', methods=['POST'])
+def classify_text():
+    data = request.get_json()
+    user_input = data.get('text')
+    print(user_input)
+    user_input = normalize_texts([user_input])
+
+    # Transform user input using the pre-trained TF-IDF vectorizer
+    user_input_transformed = tfidf_vectorizer.transform(user_input)
+
+    # Predict toxicity for the input text
+    prediction = rf_classifier.predict(user_input_transformed)
+    print(int(prediction[0]))
+    ans=int(prediction[0])
+    return jsonify({'prediction': ans})
+
 UPLOAD_FOLDER = 'uploads'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -47,6 +85,5 @@ def upload():
 def serve_uploaded_file(filename):
     return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
-
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+    app.run(debug=True)

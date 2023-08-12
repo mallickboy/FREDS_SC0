@@ -148,11 +148,36 @@ useEffect(()=>{
       console.error("Error creating post:", error);
     }
   };
-
+  const [prediction, setPrediction] = useState('');
+  const [inputText, setInputText] = useState('');
+  useEffect(()=>
+  {
+    setInputText(newPost.body)
+  },[newPost])
 const Post= async ()=>
 {
-  // ml model function call and set variable toxic .
-  createPost()
+  try {
+   
+    const response = await axios.post('http://localhost:5000/classify', {
+      text: newPost.body
+    });
+    const result = response.data.prediction === 1 ? 'toxic' : 'non-toxic';
+    console.log(result)
+    if(result==="toxic")
+  {
+    alert("The post is toxic")
+  }
+  else{
+    
+    createPost()
+}
+
+  } catch (error) {
+    console.error('Error:', error);
+    
+  }
+  // console.log("This is:-",toxic)
+  
 }
   return (
     <div className='sidebar'>
