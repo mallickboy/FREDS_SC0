@@ -1,40 +1,71 @@
-.widgets {
-    flex: 0.3;
-    
-  }
-  .widgets> h2{
-    color: rgba(117,60,216,.99);
-  }
-  
-  .widgets__input {
-    display: flex;
-    align-items: center;
-    background-color: var(--twitter-background);
-    padding: 10px;
-    border-radius: 20px;
-    margin-top: 10px;
-    margin-left: 20px;
-  }
-  
-  .widgets__input > input {
-    border: none;
-    background-color: var(--twitter-background);
-  }
-  
-  .widgets__searchIcon {
-    color: gray;
-  }
-  
-  .widgets__widgetContainer {
-    margin-top: 15px;
-    margin-left: 20px;
-    padding: 20px;
-    background-color: #f5f8fa;
-    border-radius: 20px;
-  }
-  
-  .widgets__widgetContainer > h2 {
-    font-size: 18px;
-    font-weight: 800;
-    
-  }
+#eachPost{
+  flex: 1;
+  border-right: 1px solid  rgba(117,60,216,.33);
+  border-left: 1px solid  rgba(117,60,216,.33);
+  min-width: fit-content;
+  overflow-y: scroll; 
+}
+.post{
+  display: flex;
+}
+.post__avatar {
+  padding: .7rem .1rem .75rem 1.1rem;
+}
+.post__header{
+  display: flexbox;
+  margin-top: 0.8rem;
+  /* flex-wrap: nowrap; */
+  padding: .1rem .8rem;
+}
+.post__headerText>h3 {
+  font-size: 15px;
+  font-family: 'Comfortaa', cursive;
+  font-family: 'Ubuntu', sans-serif;
+  /* font-weight: 800; */
+  margin-bottom: 5px;
+  color: aliceblue;
+}
+.post__headerText>h2 {
+  font-family: 'Comfortaa', cursive;
+  font-size: 15px;
+  /* font-weight: 800; */
+  margin-bottom: 5px;
+  color: aliceblue;
+}
+
+/* Hide scrollbar for Chrome, Safari and Opera */
+#eachPost::-webkit-scrollbar {
+  display: none;
+}
+
+/* Starting */
+
+#widgetTop{
+  display: flex;
+  flex-direction: column;
+  /* border: 1px solid rgba(117,60,216,.99); */
+  /* background-color: rgba(44, 29, 71, 0.99);   */
+  height: 55vh !important;
+  margin: 2rem;
+  border-radius: 2rem;
+  overflow: scroll  ;
+}
+#widgetTop::-webkit-scrollbar {
+  display: none;
+}
+#widgetTop>h2{
+  background-color:rgba(117, 60, 216, 0.132) ;  
+  color:rgb(226, 226, 226)  ;
+  text-align: center;
+  align-items: center;
+}
+#widgetBottom{
+  display: flex;
+  border: 2px solid green;  
+  height: 20vh;
+  /* background-color: aquamarine; */
+  color:yellow;
+}
+#widget{
+  height: 100vh;
+}
