@@ -15,14 +15,14 @@ const contract = new ethers.Contract(contract_address, contract_abi, signer);
 const socialMediaContract = contract;
 const baseImageUrl = "http://127.0.0.1:5000/uploads/";
 const Profile = () => {
+  const styling = {
+    fontSize: "40px",
+  };
   const [profiledata, setprofiledata] = useState({
     name: "",
     id: "",
     imgurl: "",
   });
-  const styling = {
-    fontSize: "40px",
-  };
 
   useEffect(() => {
     const getUser = async () => {

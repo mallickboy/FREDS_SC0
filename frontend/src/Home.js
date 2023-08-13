@@ -119,7 +119,7 @@ function Home() {
                 {/* Profile */}
                 <Route path="/profile" element={<><Profile /></>} />
                 {/* Explore          */}
-                {/* <Route path="/Explore" element={<><Explore/></>} />               */}
+                <Route path="/Explore" element={<><Explore/></>} />              
             </Routes>
 
             {/* Feed

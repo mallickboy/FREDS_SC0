@@ -13,7 +13,8 @@ const signer = provider.getSigner();
 const contract = new ethers.Contract(contract_address, contract_abi, signer); // Replace with your Ethereum node provider
 const socialMediaContract = contract;
 const pubAddress = await signer.getAddress();
-console.log(pubAddress)
+const baseImageUrl = "http://127.0.0.1:5000/uploads/";
+// console.log(pubAddress)
 
 
 function Feed() {
@@ -97,26 +98,63 @@ function Feed() {
   //   }
   // ];
   let pic = {
-    // image: "https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg",
-    avatar: "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1229892983-square.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:",
+    avatar: "https://upload.wikimedia.org/wikipedia/commons/9/99/Elon_Musk_Colorado_2022_%28cropped2%29.jpg",
+    // avatar: "https://hips.hearstapps.com/hmg-prod/images/gettyimages-1229892983-square.jpg?crop=1.00xw:1.00xh;0,0&resize=1200:",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png",
   }
 // const[updatedPost,setUpdatePost]=useState([]);
+// profile photo
+const [profiledata, setprofiledata] = useState({
+  name: "",
+  id: "",
+  imgurl: "",
+});
+
+
+  const getProfile = async (address) => {
+    const user = await contract.profileByAddress(address);
+
+
+  setprofiledata ({
+      name: user.userName,
+      id: address,
+      imgurl:  user.profilePic,
+    });
+    
+    return  user.profilePic;
+    
+  };
+  // useEffect(()=>
+  //   {
+  //     console.log(profiledata)
+  //   },[profiledata]);
+
   const formated = posts.map((eachpost, index) => {
-    // console.log(eachpost.upvote.toNumber())
+    getProfile(eachpost.publicAdd);
+    // console.log("Profile pic avater = ",getProfile(eachpost.publicAdd))
     return {
+      publicAdd:eachpost.publicAdd,
         name: eachpost.name,
         heading: eachpost.heading,
         body: eachpost.body,
         image: eachpost.image,
         comments: eachpost.comments,
         upvote: eachpost.upvote,
-        downvote: eachpost.downvote
+        downvote: eachpost.downvote,
+        // avater: getProfile(eachpost.publicAdd)
+        // avater: profiledata.imgurl // working 
+        avater :pic.image
     }
 })
 let updatedPost =formated.reverse();
 const LENGTH=updatedPost.length;
 // console.log("post array updated = ",updatedPost);
+
+
+
+
+// console.log("Got user address = ",getUser());
+
 
   return (
     <div className='feed'id="feedTop">
@@ -140,7 +178,7 @@ const LENGTH=updatedPost.length;
             key={post.text} //
             username={post.name} //
           
-            avatar={post.avatar} //
+            avatar={post.avater } //
             verified={post.verified} //
 
             heading={post.heading}
