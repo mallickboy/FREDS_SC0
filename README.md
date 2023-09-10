@@ -51,6 +51,6 @@ Welcome to the FREDS (Freedom, Rights, Expression, Democracy, and Security) proj
    - The Flask server will run on localhost:5000.
 
 **Access the Tutorial**:
-For a step-by-step guide regarding how to use FREDS refer to the tutorial linked here: [FREDS Development Setup Tutorial](https://youtu.be/PEVLJlpf_3M?si=uI2_WCSj88NIUJcD).
+For a step-by-step guide regarding how to use FREDS refer to the tutorial linked here: [FREDS Tutorial](https://youtu.be/PEVLJlpf_3M?si=uI2_WCSj88NIUJcD).
 
 Now you're ready to be a part of the future of secure, anonymous, and open online communication.
