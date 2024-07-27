@@ -4,16 +4,12 @@ https://github.com/user-attachments/assets/f50cca7d-fa6c-4b41-bbe1-b61655f3d871
 
 
 
-<h1 align="center">Discussion and Project Setup</h1>
-
-
-![freds](https://github.com/niladri2002/FREDS/assets/96686814/0f3f2dd8-2802-4a9b-8d88-9279aa1c58e1)
 
 # Introduction
 Welcome to the FREDS (Freedom, Rights, Expression, Democracy, and Security) project, a revolutionary step towards redefining social media by prioritizing user privacy, open dialogue, and global community engagement. FREDS is a decentralized social media application designed to empower individuals around the world to express themselves freely without compromising their identity or fearing repercussions. Our mission is to provide a secure, transparent, and anonymous platform for all voices to be heard, transcending geographical boundaries, and ensuring the integrity of democratic principles. This repository contains the source code and documentation for the FREDS project, and we invite you to join us in shaping the future of online communication.
+![freds](https://github.com/niladri2002/FREDS/assets/96686814/0f3f2dd8-2802-4a9b-8d88-9279aa1c58e1)
 
-
-**Setting Up FREDS Development Environment**
+# Setting Up FREDS Development Environment
 
 1. **Install MetaMask Extension and Create a Wallet**:
    - To get started, add the MetaMask extension to your Google Chrome browser. If you haven't used MetaMask before, follow this video tutorial: [How to Set Up MetaMask](https://youtu.be/Af_lQ1zUnoM).
