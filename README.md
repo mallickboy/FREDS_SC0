@@ -1,4 +1,14 @@
-# FREDS: Freedom of Expression in a Decentralized Society
+<h1 align="center"> FREDS: Freedom of Expression in a Decentralized Society </h1>
+
+
+<h1 align="center">User Guide Video Demo</h1>
+
+https://github.com/user-attachments/assets/f50cca7d-fa6c-4b41-bbe1-b61655f3d871
+
+
+
+<h1 align="center">Discussion and Project Setup</h1>
+
 
 ![freds](https://github.com/niladri2002/FREDS/assets/96686814/0f3f2dd8-2802-4a9b-8d88-9279aa1c58e1)
 
