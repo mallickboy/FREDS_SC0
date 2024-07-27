@@ -1,8 +1,5 @@
 <h1 align="center"> FREDS: Freedom of Expression in a Decentralized Society </h1>
 
-
-<h1 align="center">User Guide Video Demo</h1>
-
 https://github.com/user-attachments/assets/f50cca7d-fa6c-4b41-bbe1-b61655f3d871
 
 
